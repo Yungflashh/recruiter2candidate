@@ -1,3 +1,4 @@
+import Header from "./static/Header"
 
 
 
@@ -6,7 +7,7 @@ function App() {
 
   return (
     <>
-        
+        <Header/>
     </>
   )
 }

@@ -1,0 +1,37 @@
+.header-container{
+    background-color: #8D747B;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 86px;
+}
+
+.nav-container{
+    display: flex;
+    gap: 20px;
+    font-weight: 400;
+}
+.btn-container{
+    display: flex;
+    gap: 20px;
+}
+
+.btn-container>:nth-child(1){
+    background-color: #dc9ba5;
+    border: none;
+    height: 54px;
+    border-radius: 20px;
+    width: 100px;
+    color: white;
+    font-size: 13px;
+}
+.btn-container>:nth-child(2){
+    background-color: transparent;
+    border: 1px solid white;
+    height: 54px;
+    border-radius: 20px;
+    width: 100px;
+    color: white;
+    font-size: 13px;
+}
