@@ -1,0 +1,12 @@
+.chosenDiv{
+    width: 100%;
+    text-align: center;
+}
+
+.chosenDiv h2 {
+    font-size: 30px;
+}
+
+.chosenDiv p {
+    font-size: 20px;
+}

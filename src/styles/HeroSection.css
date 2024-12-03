@@ -12,7 +12,7 @@
     
 }
 .hero-text p{
-    font-size: 40px;
+    font-size: 2.5rem;
     width: 700px;
     
 }
@@ -35,11 +35,16 @@ button{
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 80px;
     }
 
     .hero-text{
         margin-left: 0px;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .hero-text h2{
         font-size: 30px;
@@ -47,7 +52,8 @@ button{
         text-align: center;
     }
     .hero-text p {
-        font-size: 20px;
+        font-size: 2.5rem;
+        text-align: center;
         width: 100%;
     }
     .heroImgDiv img {
