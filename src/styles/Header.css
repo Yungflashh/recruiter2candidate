@@ -35,3 +35,27 @@
     color: white;
     font-size: 13px;
 }
+
+#menu-Bar{
+    display: none;
+}
+
+
+@media (max-width: 900px){
+    .header-container{
+        justify-content: space-between;
+      
+    }
+    .nav-container, .btn-container{
+        display: none;
+    }
+
+    #menu-Bar{
+        display: flex;
+        margin-right: 40px;
+    }
+
+    .logoDiv{
+        margin-left: 20px;
+    }
+}

@@ -1,0 +1,14 @@
+.Hero-section-container{
+    display: flex;
+}
+
+.Hero-section-container h2{
+    font-size: 64px;
+}
+
+
+@media (max-width: 900px){
+    .Hero-section-container{
+        /* flex-direction: column; */
+    }
+}

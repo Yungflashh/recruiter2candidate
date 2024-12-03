@@ -1,5 +1,7 @@
 import Logo from "../assets/logo.svg"
 import "../styles/Header.css"
+import { CiMenuFries } from "react-icons/ci";
+
 const Header = () => {
   return (
     <div className="header-container">
@@ -20,6 +22,8 @@ const Header = () => {
                     <button>Login</button>
                     <button>Sign up</button>
                 </div>
+
+                <CiMenuFries id="menu-Bar" size={30}/>
     </div>
   )
 }
