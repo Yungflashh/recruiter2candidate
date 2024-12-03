@@ -8,11 +8,14 @@ const HeroSection = () => {
                 <h2>WHERE OPPORTUNITY AND TALENT FIND THEIR PERFECT MATCH.</h2>
                 <p>Streamlining the path, from talent to opportunity.</p>
 
+                <div className="btnDiv">
                 <button>Search for a Job</button>
                 <button>View Matches</button>
+                </div>
+               
             </div>
 
-            <div className="heroDiv">
+            <div className="heroImgDiv">
                 <img src={HeroImg} alt="an image"  />
             </div>
 

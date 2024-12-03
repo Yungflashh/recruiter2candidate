@@ -1,14 +1,56 @@
 .Hero-section-container{
     display: flex;
+   
 }
 
-.Hero-section-container h2{
+.hero-text{
+    margin-left: 30px;
+    
+}
+.hero-text h2{
     font-size: 64px;
+    
+}
+.hero-text p{
+    font-size: 40px;
+    width: 700px;
+    
 }
 
+button{
+    width: 150px;
+    height: 43px;
+    margin-left: 20px;
+    border-radius: 20px;
+}
+
+.btnDiv >:nth-child(1){
+    background-color: #DC9BA5;
+    border: none;
+}
 
 @media (max-width: 900px){
     .Hero-section-container{
-        /* flex-direction: column; */
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-text{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .hero-text h2{
+        font-size: 30px;
+        width: 100%;
+        text-align: center;
+    }
+    .hero-text p {
+        font-size: 20px;
+        width: 100%;
+    }
+    .heroImgDiv img {
+        width: 300px
     }
 }
