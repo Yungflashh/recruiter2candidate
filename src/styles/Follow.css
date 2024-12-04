@@ -1,0 +1,39 @@
+.cardImgDiv{
+    display: flex;
+    justify-content: space-between;
+}
+.follow-Container{
+    text-align: center;
+
+}
+
+.follow-Container h2{
+    font-size: 2.5rem
+}
+.follow-Container p{
+    font-size: 30px;
+   
+}
+
+@media (max-width:900px) {
+    .cardImgDiv{
+       flex-direction: column;
+    }
+
+    .follow-Container{
+        margin: 10px;
+    }
+
+    .follow-Container h2{
+        font-size: 1.7rem;
+    }
+    .follow-Container p{
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: justify;
+      
+    }
+    .cardImgDiv{
+        gap: 10px;
+    }
+}
