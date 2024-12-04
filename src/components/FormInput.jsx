@@ -24,6 +24,7 @@ const FormInput = ({ label, type, name }) => {
           id={name}
         />
         <label htmlFor={name} className="input-label">{label}</label>
+        
       </div>
     </div>
   );

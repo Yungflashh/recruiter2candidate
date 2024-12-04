@@ -1,0 +1,22 @@
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    border: 2px solid red;
+   
+}
+
+.formData button{
+    background-color: #DC9BA5;
+    width: 350px;
+}
+
+@media (max-width:900px){
+    .formData button{
+        margin: 0px;
+        width: 100%;
+        border: none;
+    }
+  }

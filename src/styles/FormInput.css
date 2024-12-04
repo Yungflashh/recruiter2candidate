@@ -6,14 +6,17 @@
   .input-wrapper {
     position: relative;
     margin-bottom: 20px;
+   
   }
   
   .input-wrapper input {
-    width: 100%;
-    padding: 12px;
+    width: 400px;
+    padding: 12px 0px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
+    background-color: #828884;
+   
     
   }
   
@@ -23,18 +26,27 @@
     top: 5px;
     transition: all 0.3s ease;
     font-size: 16px;
-    color: #888;
+    color: #55637A;
     pointer-events: none; /* Prevent label from being clickable */
     margin-top: 10px;
   }
   
   .input-wrapper.active input {
-    padding-top: 24px; /* Ensure input doesn't overlap with label */
+    margin: 10px;
+    padding-top: 10px; /* Ensure input doesn't overlap with label */
+    border: none;
   }
   
   .input-wrapper.active .input-label {
     top: -30px;  /* Move the label up */
-    font-size: 12px; /* Reduce label size */
+    font-size: 15px; /* Reduce label size */
     color: #000;
+    border: none;
   }
   
+
+  @media (max-width:900px){
+    .input-wrapper input{
+      width: 100%;
+    }
+  }
