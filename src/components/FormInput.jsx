@@ -32,4 +32,10 @@ const FormInput = ({ label, type, name }) => {
   );
 };
 
+FormInput.propTypes = {
+  label: PropTypes.string.isRequired, 
+  type: PropTypes.string.isRequired,   
+  name: PropTypes.string.isRequired,  
+};
+
 export default FormInput;
