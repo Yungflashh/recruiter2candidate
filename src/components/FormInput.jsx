@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/FormInput.css'; 
+import PropTypes from 'prop-types';
 
 
 const FormInput = ({ label, type, name }) => {
