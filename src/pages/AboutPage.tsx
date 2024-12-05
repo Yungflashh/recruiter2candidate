@@ -1,4 +1,5 @@
 import React from 'react'
+import "../styles/AboutPage.css"
 
 const AboutPage = () => {
   return (
@@ -15,7 +16,7 @@ const AboutPage = () => {
 
 
                     <div className="story-image">
-                        
+
                     </div>
                 </div>
 
