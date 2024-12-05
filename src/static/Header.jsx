@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../assets/logo.svg"
 import "../styles/Header.css"
 import { CiMenuFries } from "react-icons/ci";
@@ -11,8 +12,8 @@ const Header = () => {
             </div>
                 <div className="nav-container">
 
-                <nav>Home</nav>
-                <nav>About us</nav>
+                <nav><Link to={"/"}>Home </Link></nav>
+                <nav> <Link to={"/aboutUs"}>About us </Link>  </nav>
                 <nav>For Recruiter</nav>
                 <nav>For Candidate</nav>
 
