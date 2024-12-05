@@ -5,13 +5,16 @@ import Follow from '../components/Follow'
 import Contact from '../components/Contact'
 
 
+
 const HomePage = () => {
+
   return (
     <div>
         <HeroSection/>
         <Chosen />
         <Follow />
        <Contact />
+   
     </div>
   )
 }
