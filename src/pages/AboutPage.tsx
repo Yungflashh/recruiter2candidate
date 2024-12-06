@@ -2,6 +2,7 @@ import React from 'react'
 import "../styles/AboutPage.css"
 import aboutImg from "../assets/aboutImg.svg"
 import Vision from '../components/Vision'
+import CoreValues from '../components/CoreValues'
 
 const AboutPage = () => {
   return (
@@ -25,6 +26,7 @@ const AboutPage = () => {
             </div>
 
             <Vision/>
+            <CoreValues />
     </div>
   )
 }
