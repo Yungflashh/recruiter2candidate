@@ -1,0 +1,23 @@
+.visionCOntainer{
+    display: flex;
+    background-color: #E6E8EB;
+    width: 1014px;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 40px;
+    border-radius: 20px;
+}
+
+.vision-text{
+    width: 470px;
+    margin: 50px;
+}
+
+.vision-text p{
+    font-size: 24px;
+    text-align: justify;
+}
+
+.visionImg{
+    margin: 30px;
+}

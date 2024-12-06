@@ -1,6 +1,7 @@
 import React from 'react'
 import "../styles/AboutPage.css"
 import aboutImg from "../assets/aboutImg.svg"
+import Vision from '../components/Vision'
 
 const AboutPage = () => {
   return (
@@ -22,6 +23,8 @@ const AboutPage = () => {
                 </div>
 
             </div>
+
+            <Vision/>
     </div>
   )
 }

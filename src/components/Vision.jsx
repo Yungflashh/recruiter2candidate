@@ -1,4 +1,5 @@
-import React from 'react'
+import "../styles/Vision.css"
+import VisionImg from "../assets/visionImg.svg"
 
 const Vision = () => {
   return (
@@ -10,7 +11,7 @@ const Vision = () => {
                 </div>
 
                 <div className="visionImg">
-                    
+                    <img src={VisionImg} alt="a vision image" />
                 </div>
 
         </div>
