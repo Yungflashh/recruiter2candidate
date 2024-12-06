@@ -1,0 +1,29 @@
+.search-div{
+    display: flex;
+    align-items: center;
+}
+
+
+.search-div input {
+    width: 70%;
+    margin: 30px auto;
+    display: block;
+    border-radius: 20px;
+    height: 40px;
+    text-align: center;
+    background-color: #EFF3F1;
+    position: relative;
+}
+
+
+#search-icon{
+    position: absolute;
+    left: 220px;
+    z-index: 1;
+}
+
+.cardR{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
