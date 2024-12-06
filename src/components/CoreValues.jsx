@@ -1,4 +1,4 @@
-
+import "../styles/CoreValues.css"
 
 const CoreValues = () => {
   return (
