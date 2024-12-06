@@ -1,8 +1,10 @@
-import React from 'react'
+
 
 const CoreValues = () => {
   return (
-    <div>CoreValues</div>
+    <div>
+        <h2>OUR CORE VALUES</h2>
+    </div>
   )
 }
 
