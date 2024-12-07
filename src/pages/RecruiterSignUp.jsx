@@ -89,13 +89,27 @@ const RecruiterSignUp = () => {
 
         {currentPage === 2 && (
           <div className="form-page">
-            <h2>Page 2: Contact Info</h2>
+            <h2>Setting up your brand</h2>
+            <p>Setting up a brand will help present your company in an organized way.</p>
+
+            <label>Upload company logo</label>
             <input
-              type="email"
-              name="email"
+              type="file"
+              name="brief"
+              value={formData.file}
+              onChange={handleInputChange}
+              placeholder="enter a brief introduction of your company"
+              required
+            />
+
+
+            <label>Brief introduction</label>
+            <input
+              type="textarea"
+              name="brief"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="Your Email"
+              placeholder="enter a brief introduction of your company"
               required
             />
           </div>

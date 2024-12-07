@@ -12,16 +12,16 @@ const Header = () => {
             </div>
                 <div className="nav-container">
 
-                <nav><Link to={"/"}>Home </Link></nav>
-                <nav> <Link to={"/aboutUs"}>About us </Link>  </nav>
-                <nav><Link to={"/recruiter"}>For Recruiter</Link> </nav>
+                <nav><Link  to={"/"} className="white-text">Home </Link></nav>
+                <nav> <Link to={"/aboutUs"} className="white-text">About us </Link>  </nav>
+                <nav><Link to={"/recruiter"}className="white-text" >For Recruiter</Link> </nav>
                 <nav>For Candidate</nav>
 
                 </div>
 
                 <div className="btn-container">
                     <button>Login</button>
-                    <button>Sign up</button>
+                    <button> <Link to={"/signUp"} className="white-text" >Sign up</Link></button>
                 </div>
 
                 <CiMenuFries id="menu-Bar" size={30}/>

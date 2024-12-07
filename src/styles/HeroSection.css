@@ -17,11 +17,19 @@
     
 }
 
-button{
+.btnDiv button{
     width: 150px;
     height: 43px;
-    margin-left: 20px;
-    border-radius: 20px;
+    font-size: 18px;
+    border-radius: 30px;
+   
+}
+
+.btnDiv{
+    display: flex;
+    gap: 20px;
+    /* border: 2px solid red; */
+    margin: 0px;
 }
 
 .btnDiv >:nth-child(1){

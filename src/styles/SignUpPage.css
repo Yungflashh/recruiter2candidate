@@ -1,0 +1,34 @@
+
+
+.signUpContainer{
+    display: flex;
+    /* border: 2px solid red; */
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  
+}
+
+.welcome-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* border: 2px solid green; */
+    width: 400px;
+    align-items: center;
+}
+
+.btn button{
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid;
+}

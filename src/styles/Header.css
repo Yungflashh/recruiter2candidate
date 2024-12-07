@@ -17,6 +17,14 @@
     gap: 20px;
 }
 
+.white-text{
+    color: white;
+    text-decoration: none;
+}
+.black-text{
+    color: black;
+    text-decoration: none;
+}
 .btn-container>:nth-child(1){
     background-color: #dc9ba5;
     border: none;
