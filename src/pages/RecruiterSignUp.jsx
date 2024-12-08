@@ -117,7 +117,20 @@ const RecruiterSignUp = () => {
 
         {currentPage === 3 && (
           <div className="form-page">
-            <h2>Page 3: Address</h2>
+            <h2>Setting up your Preferencea</h2>
+            <p>Please fill in and select the accurate information below.</p>
+
+            <label htmlFor="">Types of roles you hire</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              placeholder="Your Address"
+              required
+            />
+
+            <label htmlFor="">Current job title</label>
             <input
               type="text"
               name="address"
