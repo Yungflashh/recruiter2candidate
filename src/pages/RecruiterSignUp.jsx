@@ -129,8 +129,8 @@ const RecruiterSignUp = () => {
               placeholder="Your Address"
               required
             />
-            
-            <label htmlFor="">Types of roles you hire</label>
+
+            <label htmlFor="">Current job title</label>
             <input
               type="text"
               name="address"
