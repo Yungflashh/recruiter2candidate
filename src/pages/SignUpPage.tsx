@@ -8,9 +8,9 @@ const SignUpPage = () => {
             <div className='welcome-container'>
                 <h2>Welcome to R2C!</h2>
                 <p>We are glad to have you here, lets set up your new account.</p>
-
+ 
                 <div className="btn">
-                    <button> <Link to={"/RecruiterSignUp"} className="black-text">Recruiter</Link> </button>
+                <Link to={"/RecruiterSignUp"} className="black-text"> <button> Recruiter</button>  </Link> 
                     <button>Candidate</button>
                 </div>
             </div>
