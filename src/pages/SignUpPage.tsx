@@ -10,7 +10,7 @@ const SignUpPage = () => {
                 <p>We are glad to have you here, lets set up your new account.</p>
  
                 <div className="btn">
-                <Link to={"/RecruiterSignUp"} className="black-text"> <button> Recruiter</button>  </Link> 
+                <Link to={"/RecruiterSignUp"} className="black-text" id='btn1'> <button> Recruiter</button>  </Link> 
                     <button>Candidate</button>
                 </div>
             </div>
