@@ -11,7 +11,7 @@ const SignUpPage = () => {
  
                 <div className="btn">
                 <Link to={"/RecruiterSignUp"} className="black-text" id='btn1'> <button> Recruiter</button>  </Link> 
-                <Link to={"/RecruiterSignUp"} className="black-text" id='btn1'>   <button>Candidate</button> </Link> 
+                < to={"/RecruiterSignUp"} className="black-text" id='btn1'>   <button>Candidate</button> </> 
                 </div>
             </div>
 
