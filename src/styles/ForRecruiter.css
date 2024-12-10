@@ -1,29 +1,51 @@
+.for-recruiter-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+#people{
+    width: 400px;
+   margin: auto;
+}
+
 .search-div{
     display: flex;
     align-items: center;
 }
 
 
-.search-div input {
-    width: 70%;
-    margin: 30px auto;
-    display: block;
-    border-radius: 20px;
-    height: 40px;
-    text-align: center;
-    background-color: #EFF3F1;
-    position: relative;
-}
-
-
-#search-icon{
-    position: absolute;
-    left: 220px;
-    z-index: 1;
-}
 
 .cardR{
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    margin: 50px 10px;
+}
+
+#btn{
+   
+    width: 230px;
+    height: 54px;
+    flex-shrink: 0;
+    margin: 30px auto;
+    border-radius: 30px;
+    background: var(--brandColor-brandColor-600, #DC9BA5);
+    border: none;
+}
+
+#link{
+    margin: auto;
+}
+
+
+@media (max-width:900px){
+    .cardR{
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    #people{
+        width: 100%;
+    }
 }
