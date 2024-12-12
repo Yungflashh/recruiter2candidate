@@ -7,7 +7,7 @@
 
 .forRecruiter-hero-section{
     display: flex;
-    border :2px solid red;
+    /* border :2px solid red; */
     justify-content: space-between;
 }
 
@@ -29,6 +29,19 @@ line-height: 56.25px;
     font-weight: 400;
     width: 80%;
     
+}
+.fr-text-container button{
+    background: #DC9BA5;
+    width: 227px;
+    height: Fixed (54px)px;
+    padding: 12px 24px 12px 24px;
+    border-radius: 30px;
+    border: none
+
+}
+
+.fr-img-div{
+    margin-top: 30px
 }
 
 
@@ -67,6 +80,16 @@ line-height: 56.25px;
 
 
 @media (max-width:900px){
+    .forRecruiter-hero-section{
+        flex-direction: column;
+    }
+
+    .fr-img-div{
+     margin: 30px
+    }
+    .fr-img-div img{
+        width: 100%;
+    }
     .cardR{
         flex-direction: column;
         align-items: center;
@@ -75,5 +98,9 @@ line-height: 56.25px;
 
     #people{
         width: 100%;
+    }
+
+    .fr-text-container button{
+        font-size: 16p
     }
 }
