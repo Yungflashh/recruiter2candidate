@@ -7,11 +7,14 @@ const RecruiterSignUp = () => {
     company_name: '',
     industry: '',
     company_size: '',
-    image: '',
+    image: null,
     brief_introduction: '',
-    role_type: '', // Stores the input for role type
-    job_titles: [], // Stores added job titles as an array
+    roles: '',
+    job_title: '',
+    qualification: '', // for the radio buttons
   });
+  const [savedRoles, setSavedRoles] = useState([]);
+  const [savedJobTitles, setSavedJobTitles] = useState([]);
 
   // Progress calculation
   const progress = ((currentPage - 1) / 3) * 100;
@@ -26,32 +29,13 @@ const RecruiterSignUp = () => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files[0], // Handle the first file selected
-    });
-  };
-
-  // Add job title to list
-  const handleAddJobTitle = () => {
-    if (formData.role_type.trim() !== "") {
+    const file = files[0];
+    if (file) {
       setFormData({
         ...formData,
-        job_titles: [...formData.job_titles, formData.role_type],
-        role_type: '', // Reset role_type input after adding
+        [name]: file,
       });
-    } else {
-      alert("Please enter a job title.");
     }
-  };
-
-  // Remove job title from list
-  const handleRemoveJobTitle = (index) => {
-    const updatedJobTitles = formData.job_titles.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      job_titles: updatedJobTitles,
-    });
   };
 
   const handleNextPage = () => {
@@ -72,11 +56,33 @@ const RecruiterSignUp = () => {
     console.log('Form submitted:', formData);
   };
 
+  const handleAddRole = () => {
+    if (formData.roles.trim() !== "") {
+      setSavedRoles([...savedRoles, formData.roles]);
+      setFormData({ ...formData, roles: '' });
+    }
+  };
+
+  const handleAddJobTitle = () => {
+    if (formData.job_title.trim() !== "") {
+      setSavedJobTitles([...savedJobTitles, formData.job_title]);
+      setFormData({ ...formData, job_title: '' });
+    }
+  };
+
+  const handleDeleteRole = (roleToDelete) => {
+    setSavedRoles(savedRoles.filter(role => role !== roleToDelete));
+  };
+
+  const handleDeleteJobTitle = (jobTitleToDelete) => {
+    setSavedJobTitles(savedJobTitles.filter(job => job !== jobTitleToDelete));
+  };
+
   return (
     <div className="form-container">
       {/* Progress Bar */}
       <div className="progress-bar">
-        <div style={{ width: `${progress}%` }} className="progress"></div>
+        <div className="progress" style={{ width: `${progress}%` }}></div>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -84,9 +90,10 @@ const RecruiterSignUp = () => {
           <div className="form-page">
             <h2>Setting up Your Company Info</h2>
 
-            <label>Enter company name</label>
+            <label htmlFor="company_name">Enter company name</label>
             <input
               type="text"
+              id="company_name"
               name="company_name"
               value={formData.company_name}
               onChange={handleInputChange}
@@ -94,9 +101,10 @@ const RecruiterSignUp = () => {
               required
             />
 
-            <label>Industry</label>
+            <label htmlFor="industry">Industry</label>
             <input
               type="text"
+              id="industry"
               name="industry"
               value={formData.industry}
               onChange={handleInputChange}
@@ -104,9 +112,10 @@ const RecruiterSignUp = () => {
               required
             />
 
-            <label>Company size (number of employees)</label>
+            <label htmlFor="company_size">Company size (number of employees)</label>
             <input
-              type="text"
+              type="number"
+              id="company_size"
               name="company_size"
               value={formData.company_size}
               onChange={handleInputChange}
@@ -121,16 +130,25 @@ const RecruiterSignUp = () => {
             <h2>Setting up your brand</h2>
             <p>Setting up a brand will help present your company in an organized way.</p>
 
-            <label>Upload company logo</label>
+            <label htmlFor="image">Upload company logo</label>
             <input
               type="file"
+              id="image"
               name="image"
               onChange={handleFileChange}
               required
             />
+            {formData.image && (
+              <img
+                src={URL.createObjectURL(formData.image)}
+                alt="Logo preview"
+                style={{ width: '100px', height: 'auto', marginTop: '10px' }}
+              />
+            )}
 
-            <label>Brief introduction</label>
+            <label htmlFor="brief_introduction">Brief introduction</label>
             <textarea
+              id="brief_introduction"
               name="brief_introduction"
               value={formData.brief_introduction}
               onChange={handleInputChange}
@@ -145,36 +163,105 @@ const RecruiterSignUp = () => {
             <h2>Setting up your Preferences</h2>
             <p>Please fill in and select the accurate information below.</p>
 
-            {/* Types of roles you hire */}
-            <label>Current job titles</label>
-            <p>Add more than 5 job titles to increase your chance of being noticed.</p>
+            <label htmlFor="roles">Types of roles you hire</label>
             <input
               type="text"
-              name="role_type"
-              value={formData.role_type} // Using role_type for the input
+              id="roles"
+              name="roles"
+              value={formData.roles}
               onChange={handleInputChange}
-              placeholder="Enter a role type"
-              required
+              placeholder="Roles you hire for"
+            />
+            <button type="button" onClick={handleAddRole}>Add Role</button>
+
+            <div className="saved-items">
+              <h4>Saved Roles</h4>
+              {savedRoles.length > 0 ? (
+                <ul>
+                  {savedRoles.map((role, index) => (
+                    <li key={index}>
+                      {role}
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteRole(role)}
+                        className="delete-icon"
+                      >
+                        ❌
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No roles added yet.</p>
+              )}
+            </div>
+
+            <label htmlFor="job_title">Current job title</label>
+            <input
+              type="text"
+              id="job_title"
+              name="job_title"
+              value={formData.job_title}
+              onChange={handleInputChange}
+              placeholder="Your job title"
             />
             <button type="button" onClick={handleAddJobTitle}>Add Job Title</button>
 
-            {/* Display added job titles below */}
+            <div className="saved-items">
+              <h4>Saved Job Titles</h4>
+              {savedJobTitles.length > 0 ? (
+                <ul>
+                  {savedJobTitles.map((jobTitle, index) => (
+                    <li key={index}>
+                      {jobTitle}
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteJobTitle(jobTitle)}
+                        className="delete-icon"
+                      >
+                        ❌
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No job titles added yet.</p>
+              )}
+            </div>
+
+            <label>Which of the following qualifications do you prefer?</label>
             <div>
-              <ul>
-                {formData.job_titles.map((job, index) => (
-                  <li key={index} className="job-title-item">
-                    {job}
-                    <span
-                      className="cancel-icon"
-                      onClick={() => handleRemoveJobTitle(index)}
-                      role="button"
-                      aria-label="Remove job title"
-                    >
-                      &times;
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <input
+                type="radio"
+                id="degree"
+                name="qualification"
+                value="Degree"
+                onChange={handleInputChange}
+                checked={formData.qualification === 'Degree'}
+              />
+              <label htmlFor="degree">Degree</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="diploma"
+                name="qualification"
+                value="Diploma"
+                onChange={handleInputChange}
+                checked={formData.qualification === 'Diploma'}
+              />
+              <label htmlFor="diploma">Diploma</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="certificate"
+                name="qualification"
+                value="Certificate"
+                onChange={handleInputChange}
+                checked={formData.qualification === 'Certificate'}
+              />
+              <label htmlFor="certificate">Certificate</label>
             </div>
           </div>
         )}
