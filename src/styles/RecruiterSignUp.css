@@ -50,3 +50,22 @@
     cursor: not-allowed;
   }
   
+
+  .job-title-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .cancel-icon {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .job-title-item {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  

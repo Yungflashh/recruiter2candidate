@@ -1,5 +1,5 @@
-import  { useState } from 'react';
-import "../styles/RecruiterSignUp.css"
+import { useState } from 'react';
+import "../styles/RecruiterSignUp.css";
 
 const RecruiterSignUp = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -7,8 +7,10 @@ const RecruiterSignUp = () => {
     company_name: '',
     industry: '',
     company_size: '',
-    image : '',
-    brief_introduction : ''
+    image: '',
+    brief_introduction: '',
+    role_type: '', // Stores the input for role type
+    job_titles: [], // Stores added job titles as an array
   });
 
   // Progress calculation
@@ -18,7 +20,35 @@ const RecruiterSignUp = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files[0], // Handle the first file selected
+    });
+  };
+
+  // Add job title to list
+  const handleAddJobTitle = () => {
+    if (formData.role_type.trim() !== "") {
+      setFormData({
+        ...formData,
+        job_titles: [...formData.job_titles, formData.role_type],
+        role_type: '', // Reset role_type input after adding
+      });
+    }
+  };
+
+  // Remove job title from list
+  const handleRemoveJobTitle = (index) => {
+    const updatedJobTitles = formData.job_titles.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      job_titles: updatedJobTitles,
     });
   };
 
@@ -56,30 +86,27 @@ const RecruiterSignUp = () => {
             <input
               type="text"
               name="company_name"
-              value={formData.name}
+              value={formData.company_name}
               onChange={handleInputChange}
               placeholder="Company Name"
               required
             />
 
             <label>Industry</label>
-
             <input
               type="text"
-              name="Industry"
-              value={formData.name}
+              name="industry"
+              value={formData.industry}
               onChange={handleInputChange}
               placeholder="Industry"
               required
             />
 
-
             <label>Company size (number of employees)</label>
-
             <input
               type="text"
-              name="size"
-              value={formData.name}
+              name="company_size"
+              value={formData.company_size}
               onChange={handleInputChange}
               placeholder="Company size"
               required
@@ -95,21 +122,17 @@ const RecruiterSignUp = () => {
             <label>Upload company logo</label>
             <input
               type="file"
-              name="brief"
-              value={formData.file}
-              onChange={handleInputChange}
-              placeholder="enter a brief introduction of your company"
+              name="image"
+              onChange={handleFileChange}
               required
             />
 
-
             <label>Brief introduction</label>
-            <input
-              type="textarea"
-              name="brief"
-              value={formData.email}
+            <textarea
+              name="brief_introduction"
+              value={formData.brief_introduction}
               onChange={handleInputChange}
-              placeholder="enter a brief introduction of your company"
+              placeholder="Enter a brief introduction of your company"
               required
             />
           </div>
@@ -117,28 +140,42 @@ const RecruiterSignUp = () => {
 
         {currentPage === 3 && (
           <div className="form-page">
-            <h2>Setting up your Preferencea</h2>
+            <h2>Setting up your Preferences</h2>
             <p>Please fill in and select the accurate information below.</p>
 
-            <label htmlFor="">Types of roles you hire</label>
+            {/* Types of roles you hire */}
+            <label>Current job titles</label>
+            <p>Add more than 5 job titles to increase your chance of being noticed.</p>
             <input
               type="text"
-              name="address"
-              value={formData.address}
+              name="role_type"
+              value={formData.role_type}
               onChange={handleInputChange}
-              placeholder="Your Address"
+              placeholder="Enter a role type"
               required
             />
+            <button type="button" onClick={handleAddJobTitle}>Add Job Title</button>
 
-            <label htmlFor="">Current job title</label>
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleInputChange}
-              placeholder="Your Address"
-              required
-            />
+           
+
+            {/* Display added job titles below */}
+            <div>
+              <ul>
+                {formData.job_titles.map((job, index) => (
+                  <li key={index} className="job-title-item">
+                    {job}
+                    <span
+                      className="cancel-icon"
+                      onClick={() => handleRemoveJobTitle(index)}
+                      role="button"
+                      aria-label="Remove job title"
+                    >
+                      &times;
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
 
