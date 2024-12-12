@@ -112,11 +112,11 @@ input[type="radio"] {
   color: #d32f2f;
 }
 
-img {
+/* img {
   margin-top: 15px;
   max-width: 150px;
   border-radius: 5px;
-}
+} */
 
 .form-page p {
   margin-top: 10px;

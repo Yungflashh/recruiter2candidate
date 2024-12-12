@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Upload, Button, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import "../styles/RecruiterSignUp.css";
 
 const RecruiterSignUp = () => {
@@ -27,14 +29,15 @@ const RecruiterSignUp = () => {
     });
   };
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    const file = files[0];
-    if (file) {
+  const handleFileChange = (info) => {
+    if (info.file.status === 'done') {
       setFormData({
         ...formData,
-        [name]: file,
+        image: info.file.originFileObj,
       });
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
     }
   };
 
@@ -131,20 +134,23 @@ const RecruiterSignUp = () => {
             <p>Setting up a brand will help present your company in an organized way.</p>
 
             <label htmlFor="image">Upload company logo</label>
-            <input
-              type="file"
-              id="image"
+            <Upload
               name="image"
+              listType="picture-card"
+              showUploadList={false}
+              action="/upload" // You can set an actual upload endpoint here.
               onChange={handleFileChange}
-              required
-            />
-            {formData.image && (
-              <img
-                src={URL.createObjectURL(formData.image)}
-                alt="Logo preview"
-                style={{ width: '100px', height: 'auto', marginTop: '10px' }}
-              />
-            )}
+            >
+              {formData.image ? (
+                <img
+                  src={URL.createObjectURL(formData.image)}
+                  alt="Logo preview"
+                  style={{ width: '100px', height: 'auto' }}
+                />
+              ) : (
+                <Button icon={<UploadOutlined />}>Upload</Button>
+              )}
+            </Upload>
 
             <label htmlFor="brief_introduction">Brief introduction</label>
             <textarea
