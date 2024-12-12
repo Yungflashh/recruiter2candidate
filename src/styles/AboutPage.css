@@ -28,3 +28,20 @@
 .story-image img{
     height: 400px;
 }
+
+@media (max-width:900px){
+    .heroSectionAbout{
+        height: auto;
+    }
+    .storyDiv{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        /* margin-bottom: 100px */
+    }
+
+    .story-text{
+        width: q00%
+    }
+}
