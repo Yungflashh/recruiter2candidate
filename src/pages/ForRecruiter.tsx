@@ -1,18 +1,35 @@
 import React from 'react'
 import "../styles/ForRecruiter.css"
-import { IoSearchOutline } from "react-icons/io5";
+
 import RecruiterCard from '../components/RecruiterCard';
 import cardimg1 from "../assets/cardVision.svg"
 import cardimg2 from "../assets/cardVision2.svg"
 import cardimg3 from "../assets/cardVision3.svg"
 import cardimg4 from "../assets/cardVision4.svg"
 import people from "../assets/people.svg"
+import frImg from "../assets/frImg.svg"
 import { Link } from 'react-router-dom';
 
 
 const ForRecruiter = () => {
   return (
     <div className='for-recruiter-container'> 
+
+        <div className="forRecruiter-hero-section">
+            <div className="fr-text-container">
+                  <h2>Hire Smarter, Faster, and Better</h2>
+                  <p>Connect with top talent effortlessly and fill positions faster than ever.</p>
+                  <button>Discover Candidates now</button>
+            </div>
+
+            <div className="fr-img-div">
+                <img src={frImg} alt="an image" />
+
+            </div>
+
+
+          
+        </div>
 
       
         <div className="cardR">
