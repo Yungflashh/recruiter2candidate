@@ -40,6 +40,8 @@ const RecruiterSignUp = () => {
         job_titles: [...formData.job_titles, formData.role_type],
         role_type: '', // Reset role_type input after adding
       });
+    } else {
+      alert("Please enter a job title.");
     }
   };
 
@@ -149,14 +151,12 @@ const RecruiterSignUp = () => {
             <input
               type="text"
               name="role_type"
-              value={formData.role_type}
+              value={formData.role_type} // Using role_type for the input
               onChange={handleInputChange}
               placeholder="Enter a role type"
               required
             />
             <button type="button" onClick={handleAddJobTitle}>Add Job Title</button>
-
-           
 
             {/* Display added job titles below */}
             <div>
