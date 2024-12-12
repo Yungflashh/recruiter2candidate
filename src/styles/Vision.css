@@ -24,5 +24,12 @@
 
 
 @media (max-width:900px){
-    
+    .visionCOntainer{
+        width: 100%;
+        flex-direction: column;
+    }
+    .vision-text{
+        width: 100%;
+        margin: 0px;
+    }
 }
