@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import "../styles/RecruiterSignUp.css";
+import axios from "axios";
 
 const RecruiterSignUp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
     company_name: '',
     industry: '',
     company_size: '',
@@ -13,7 +17,7 @@ const RecruiterSignUp = () => {
     brief_introduction: '',
     roles: '',
     job_title: '',
-    qualification: '', // for the radio buttons
+    qualification: '',
   });
   const [savedRoles, setSavedRoles] = useState([]);
   const [savedJobTitles, setSavedJobTitles] = useState([]);
@@ -55,8 +59,38 @@ const RecruiterSignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to an API or display a success message)
-    console.log('Form submitted:', formData);
+
+    const form = new FormData();
+
+    // Appending form fields to the FormData object
+    form.append('username', formData.username);
+    form.append('email', formData.email);
+    form.append('password', formData.password);
+    form.append('company', formData.company_name);
+    form.append('industry', formData.industry);
+    form.append('size', formData.company_size);
+    form.append('introduction', formData.brief_introduction);
+    form.append('qualification', formData.qualification);
+
+    // Appending roles and job titles as arrays
+    form.append('hiring', JSON.stringify(savedRoles));
+    form.append('title', JSON.stringify(savedJobTitles));
+
+    // Appending the image/logo file
+    if (formData.image) {
+      form.append('logo', formData.image);
+    }
+
+    // Make API request
+    axios.post("http://r2c.onrender.com/signUp", form)
+      .then(data => {
+        console.log(data);
+        message.success('Sign up successful!');
+      })
+      .catch(error => {
+        console.log(error);
+        message.error('Sign up failed!');
+      });
   };
 
   const handleAddRole = () => {
@@ -93,7 +127,40 @@ const RecruiterSignUp = () => {
           <div className="form-page">
             <h2>Setting up Your Company Info</h2>
 
-            <label htmlFor="company_name">Enter company name</label>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              placeholder="Username"
+              required
+            />
+
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Email"
+              required
+            />
+
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Password"
+              required
+            />
+
+            <label htmlFor="company_name">Company Name</label>
             <input
               type="text"
               id="company_name"
@@ -115,14 +182,14 @@ const RecruiterSignUp = () => {
               required
             />
 
-            <label htmlFor="company_size">Company size (number of employees)</label>
+            <label htmlFor="company_size">Company Size</label>
             <input
               type="number"
               id="company_size"
               name="company_size"
               value={formData.company_size}
               onChange={handleInputChange}
-              placeholder="Company size"
+              placeholder="Company Size"
               required
             />
           </div>
@@ -131,14 +198,13 @@ const RecruiterSignUp = () => {
         {currentPage === 2 && (
           <div className="form-page">
             <h2>Setting up your brand</h2>
-            <p>Setting up a brand will help present your company in an organized way.</p>
 
             <label htmlFor="image">Upload company logo</label>
             <Upload
-              name="image"
+              name="logo"
               listType="picture-card"
               showUploadList={false}
-              action="/upload" // You can set an actual upload endpoint here.
+              action="/upload" // Can be used to display upload progress
               onChange={handleFileChange}
             >
               {formData.image ? (
@@ -152,7 +218,7 @@ const RecruiterSignUp = () => {
               )}
             </Upload>
 
-            <label htmlFor="brief_introduction">Brief introduction</label>
+            <label htmlFor="brief_introduction">Brief Introduction</label>
             <textarea
               id="brief_introduction"
               name="brief_introduction"
@@ -167,16 +233,15 @@ const RecruiterSignUp = () => {
         {currentPage === 3 && (
           <div className="form-page">
             <h2>Setting up your Preferences</h2>
-            <p>Please fill in and select the accurate information below.</p>
 
-            <label htmlFor="roles">Types of roles you hire</label>
+            <label htmlFor="roles">Roles you hire for</label>
             <input
               type="text"
               id="roles"
               name="roles"
               value={formData.roles}
               onChange={handleInputChange}
-              placeholder="Roles you hire for"
+              placeholder="Roles"
             />
             <button type="button" onClick={handleAddRole}>Add Role</button>
 
@@ -202,14 +267,14 @@ const RecruiterSignUp = () => {
               )}
             </div>
 
-            <label htmlFor="job_title">Current job title</label>
+            <label htmlFor="job_title">Job Titles</label>
             <input
               type="text"
               id="job_title"
               name="job_title"
               value={formData.job_title}
               onChange={handleInputChange}
-              placeholder="Your job title"
+              placeholder="Job Title"
             />
             <button type="button" onClick={handleAddJobTitle}>Add Job Title</button>
 
@@ -235,7 +300,7 @@ const RecruiterSignUp = () => {
               )}
             </div>
 
-            <label>Which of the following qualifications do you prefer?</label>
+            <label>Qualification</label>
             <div>
               <input
                 type="radio"
