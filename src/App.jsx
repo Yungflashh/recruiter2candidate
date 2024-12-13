@@ -3,6 +3,7 @@ import CandidateSignUp from "./pages/CandidateSignUp"
 import ForRecruiter from "./pages/ForRecruiter"
 import HomePage from "./pages/HomePage"
 import RecruiterSignUp from "./pages/RecruiterSignUp"
+import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import Footer from "./static/Footer"
 import Header from "./static/Header"
@@ -25,6 +26,7 @@ function App() {
        <Route path="/RecruiterSignUp" element = { <RecruiterSignUp />} />
        <Route path="/CandidateSignUp" element = { <CandidateSignUp />} />
        <Route path="/signUp" element = { <SignUpPage />} />
+       <Route path="/signin" element = { <SignInPage/>} />
 
         </Routes>
         <Footer/>
