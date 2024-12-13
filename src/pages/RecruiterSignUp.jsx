@@ -57,7 +57,7 @@ const RecruiterSignUp = () => {
     e.preventDefault();
     // Handle form submission (e.g., send data to an API or display a success message)
     axios.post ("r2c.onrender.com/signUp")
-    .then(data => {       
+    .then(data => {
       console.log(data);
       
     }
