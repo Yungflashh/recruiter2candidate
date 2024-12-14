@@ -47,41 +47,34 @@ const RecruiterSignUp = () => {
     }
   };
 
-  // Function to check if the username is available
-  const checkUsernameAvailability = async () => {
-    console.log("Checking username availability with username:", formData.username); // Log username
-    try {
-      // Logging the data that will be sent to the backend
-      const dataToSend = { username: formData.username };
-      console.log("Data sent to backend for username check:", dataToSend);
+  // Function to check both username and email availability together
+  const checkAvailability = async () => {
+    const dataToSend = {
+      username: formData.username,
+      email: formData.email
+    };
 
+    // Logging the data before sending to backend
+    console.log("Data sent to backend for availability check:", dataToSend);
+
+    try {
       const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
-      if (response.data.available) {
+
+      // Handling the response based on the availability of username and email
+      if (response.data.usernameAvailable && response.data.emailAvailable) {
         setUsernameTaken(false); // Username is available
-      } else {
-        setUsernameTaken(true); // Username is taken
-        message.error('Username is already taken.');
-      }
-    } catch (error) {
-      console.log(error);
-      message.error(error.response.data.error);
-    }
-  };
-
-  // Function to check if the email is available
-  const checkEmailAvailability = async () => {
-    console.log("Checking email availability with email:", formData.email); // Log email
-    try {
-      // Logging the data that will be sent to the backend
-      const dataToSend = { email: formData.email };
-      console.log("Data sent to backend for email check:", dataToSend);
-
-      const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
-      if (response.data.available) {
         setEmailTaken(false); // Email is available
       } else {
-        setEmailTaken(true); // Email is taken
-        message.error('Email is already taken.');
+        if (!response.data.usernameAvailable) {
+          console.log(response);
+          
+          setUsernameTaken(false);
+          message.error('Username is Available.');
+        }
+        if (!response.data.emailAvailable) {
+          setEmailTaken(false);
+          message.error('Email is Available');
+        }
       }
     } catch (error) {
       console.log(error);
@@ -90,22 +83,23 @@ const RecruiterSignUp = () => {
   };
 
   const handleNextPage = async () => {
-    // Check if the username is available before moving to the next page
+    // Check if the username and email are available before moving to the next page
     if (currentPage === 1) {
       if (formData.username.trim() === '') {
         message.error('Username is required.');
         return;
       }
-      await checkUsernameAvailability();
-      if (usernameTaken) return; // Stop navigation if the username is taken
 
       // Check if the email is filled when username is provided
       if (formData.username.trim() !== "" && formData.email.trim() === '') {
         message.error('Email is required.');
         return;
       }
-      await checkEmailAvailability();
-      if (emailTaken) return; // Stop navigation if the email is taken
+
+      await checkAvailability();
+      
+      // Stop navigation if either username or email is taken
+      if (usernameTaken || emailTaken) return;
     }
 
     if (currentPage < 3) {
