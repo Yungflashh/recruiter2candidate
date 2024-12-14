@@ -21,6 +21,8 @@ const RecruiterSignUp = () => {
   });
   const [savedRoles, setSavedRoles] = useState([]);
   const [savedJobTitles, setSavedJobTitles] = useState([]);
+  const [usernameTaken, setUsernameTaken] = useState(false);
+  const [emailTaken, setEmailTaken] = useState(false); // Track if email is taken
 
   // Progress calculation
   const progress = ((currentPage - 1) / 3) * 100;
@@ -45,7 +47,60 @@ const RecruiterSignUp = () => {
     }
   };
 
-  const handleNextPage = () => {
+  // Function to check if the username is available
+  const checkUsernameAvailability = async () => {
+    try {
+      const response = await axios.post('https://r2c.onrender.com/checkCred', {
+        username: formData.username,
+      });
+      if (response.data.available) {
+        setUsernameTaken(false); // Username is available
+      } else {
+        setUsernameTaken(true); // Username is taken
+        message.error('Username is already taken.');
+      }
+    } catch (error) {
+      console.log(error);
+      message.error(error.response.data.error);
+    }
+  };
+
+  // Function to check if the email is available
+  const checkEmailAvailability = async () => {
+    try {
+      const response = await axios.post('https://r2c.onrender.com/checkCred', {
+        email: formData.email,
+      });
+      if (response.data.available) {
+        setEmailTaken(false); // Email is available
+      } else {
+        setEmailTaken(true); // Email is taken
+        message.error('Email is already taken.');
+      }
+    } catch (error) {
+      console.log(error);
+      message.error(error.response.data.error);
+    }
+  };
+
+  const handleNextPage = async () => {
+    // Check if the username is available before moving to the next page
+    if (currentPage === 1) {
+      if (formData.username.trim() === '') {
+        message.error('Username is required.');
+        return;
+      }
+      await checkUsernameAvailability();
+      if (usernameTaken) return; // Stop navigation if the username is taken
+
+      if (formData.email.trim() === '') {
+        message.error('Email is required.');
+        return;
+      }
+      await checkEmailAvailability();
+      if (emailTaken) return; // Stop navigation if the email is taken
+    }
+
     if (currentPage < 3) {
       setCurrentPage(currentPage + 1);
     }
@@ -82,14 +137,14 @@ const RecruiterSignUp = () => {
     }
 
     // Make API request
-    axios.post("http://r2c.onrender.com/signUp", form)
+    axios.post("https://r2c.onrender.com/signUp", form)
       .then(data => {
         console.log(data);
         message.success('Sign up successful!');
       })
       .catch(error => {
         console.log(error);
-        message.error('Sign up failed!');
+        message.error(error.response?.data?.error || 'An error occurred.');
       });
   };
 
@@ -137,6 +192,7 @@ const RecruiterSignUp = () => {
               placeholder="Username"
               required
             />
+            {usernameTaken && <p style={{ color: 'red' }}>Username is already taken</p>}
 
             <label htmlFor="email">Email</label>
             <input
@@ -148,6 +204,7 @@ const RecruiterSignUp = () => {
               placeholder="Email"
               required
             />
+            {emailTaken && <p style={{ color: 'red' }}>Email is already taken</p>}
 
             <label htmlFor="password">Password</label>
             <input
@@ -204,7 +261,6 @@ const RecruiterSignUp = () => {
               name="logo"
               listType="picture-card"
               showUploadList={false}
-              action="/upload" // Can be used to display upload progress
               onChange={handleFileChange}
             >
               {formData.image ? (

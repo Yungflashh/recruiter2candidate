@@ -11,11 +11,11 @@
   
   .input-wrapper input {
     width: 400px;
-    padding: 12px 0px;
+    padding: 12px 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-    background-color: #828884;
+    /* background-color: #828884; */
    
     
   }
@@ -34,7 +34,7 @@
   .input-wrapper.active input {
     margin: 10px;
     padding-top: 10px; /* Ensure input doesn't overlap with label */
-    border: none;
+    /* border: none; */
   }
   
   .input-wrapper.active .input-label {
