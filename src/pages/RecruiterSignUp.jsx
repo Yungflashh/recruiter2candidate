@@ -3,8 +3,10 @@ import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import "../styles/RecruiterSignUp.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RecruiterSignUp = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState({
     username: '',
@@ -24,7 +26,6 @@ const RecruiterSignUp = () => {
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [emailTaken, setEmailTaken] = useState(false);
 
-  // Progress calculation
   const progress = ((currentPage - 1) / 3) * 100;
 
   const handleInputChange = (e) => {
@@ -47,23 +48,18 @@ const RecruiterSignUp = () => {
     }
   };
 
-  // Function to check both username and email availability together
   const checkAvailability = async () => {
     const dataToSend = {
       username: formData.username,
-      email: formData.email
+      email: formData.email,
     };
 
     try {
       const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
-
-      // Handle success case
       setUsernameTaken(false);
       setEmailTaken(false);
-
-      return true; // Proceed to next step
+      return true;
     } catch (error) {
-      // Handle errors if username or email is already taken
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.error;
 
@@ -84,7 +80,6 @@ const RecruiterSignUp = () => {
 
   const handleNextPage = async () => {
     if (currentPage === 1) {
-      // Ensure username, email and password are entered and valid
       if (formData.username.trim() === '') {
         message.error('Username is required.');
         return;
@@ -95,7 +90,6 @@ const RecruiterSignUp = () => {
         return;
       }
 
-      // Validate email format
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(formData.email)) {
         message.error('Please enter a valid email address.');
@@ -107,28 +101,26 @@ const RecruiterSignUp = () => {
         return;
       }
 
-      // Validate password strength
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordRegex.test(formData.password)) {
         message.error('Password must be at least 8 characters long and contain both letters and numbers.');
         return;
       }
 
-      // Perform the availability check
       const isAvailable = await checkAvailability();
       if (!isAvailable) {
-        return; // Exit if username or email is taken
+        return;
       }
     }
 
     if (currentPage < 3) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage(prevPage => prevPage + 1); // Updated to use previous page value
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage(prevPage => prevPage - 1); // Use previous page value
     }
   };
 
@@ -136,8 +128,6 @@ const RecruiterSignUp = () => {
     e.preventDefault();
 
     const form = new FormData();
-
-    // Appending form fields to the FormData object
     form.append('username', formData.username);
     form.append('email', formData.email);
     form.append('password', formData.password);
@@ -146,21 +136,18 @@ const RecruiterSignUp = () => {
     form.append('size', formData.company_size);
     form.append('introduction', formData.brief_introduction);
     form.append('qualification', formData.qualification);
-
-    // Appending roles and job titles as arrays
     form.append('hiring', JSON.stringify(savedRoles));
     form.append('title', JSON.stringify(savedJobTitles));
 
-    // Appending the image/logo file
     if (formData.image) {
       form.append('logo', formData.image);
     }
 
-    // Make API request
     axios.post("https://r2c.onrender.com/signUp", form)
       .then(data => {
         console.log(data);
         message.success('Sign up successful!');
+        navigate("payment");
       })
       .catch(error => {
         console.log(error);
@@ -190,10 +177,9 @@ const RecruiterSignUp = () => {
     setSavedJobTitles(savedJobTitles.filter(job => job !== jobTitleToDelete));
   };
 
-  // File validation for image upload (file type and size)
   const beforeUpload = (file) => {
     const isImage = file.type.startsWith('image/');
-    const isSmallEnough = file.size / 1024 / 1024 < 2; // less than 2MB
+    const isSmallEnough = file.size / 1024 / 1024 < 2;
 
     if (!isImage) {
       message.error('You can only upload image files!');
@@ -208,16 +194,15 @@ const RecruiterSignUp = () => {
 
   return (
     <div className="form-container">
-      {/* Progress Bar */}
       <div className="progress-bar">
         <div className="progress" style={{ width: `${progress}%` }}></div>
       </div>
 
+      {/* Separate form tag only for submit button */}
       <form onSubmit={handleSubmit}>
         {currentPage === 1 && (
           <div className="form-page">
             <h2>Setting up Your Company Info</h2>
-
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -291,7 +276,6 @@ const RecruiterSignUp = () => {
         {currentPage === 2 && (
           <div className="form-page">
             <h2>Setting up your brand</h2>
-
             <label htmlFor="image">Upload company logo</label>
             <Upload
               name="logo"
@@ -327,7 +311,6 @@ const RecruiterSignUp = () => {
         {currentPage === 3 && (
           <div className="form-page">
             <h2>Setting up your Preferences</h2>
-
             <label htmlFor="roles">Roles you hire for</label>
             <input
               type="text"
@@ -444,6 +427,6 @@ const RecruiterSignUp = () => {
       </form>
     </div>
   );
-}
+};
 
 export default RecruiterSignUp;
