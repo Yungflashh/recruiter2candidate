@@ -135,3 +135,13 @@ input[type="radio"] {
 .saved-items {
   margin-top: 20px;
 }
+
+
+.btn-cta{
+  background: #DC9BA5;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100px;
+  color: white;
+  margin-right: 20px;
+}

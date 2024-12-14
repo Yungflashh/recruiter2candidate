@@ -3,7 +3,7 @@ import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import "../styles/RecruiterSignUp.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const RecruiterSignUp = () => {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const RecruiterSignUp = () => {
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [emailTaken, setEmailTaken] = useState(false);
 
+  // Progress calculation
   const progress = ((currentPage - 1) / 3) * 100;
 
   const handleInputChange = (e) => {
@@ -48,18 +49,23 @@ const RecruiterSignUp = () => {
     }
   };
 
+  // Function to check both username and email availability together
   const checkAvailability = async () => {
     const dataToSend = {
       username: formData.username,
-      email: formData.email,
+      email: formData.email
     };
 
     try {
       const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
+
+      // Handle success case
       setUsernameTaken(false);
       setEmailTaken(false);
-      return true;
+
+      return true; // Proceed to next step
     } catch (error) {
+      // Handle errors if username or email is already taken
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.error;
 
@@ -80,6 +86,7 @@ const RecruiterSignUp = () => {
 
   const handleNextPage = async () => {
     if (currentPage === 1) {
+      // Ensure username, email, and password are entered and valid
       if (formData.username.trim() === '') {
         message.error('Username is required.');
         return;
@@ -90,6 +97,7 @@ const RecruiterSignUp = () => {
         return;
       }
 
+      // Validate email format
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(formData.email)) {
         message.error('Please enter a valid email address.');
@@ -101,58 +109,69 @@ const RecruiterSignUp = () => {
         return;
       }
 
+      // Validate password strength
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordRegex.test(formData.password)) {
         message.error('Password must be at least 8 characters long and contain both letters and numbers.');
         return;
       }
 
+      // Perform the availability check
       const isAvailable = await checkAvailability();
       if (!isAvailable) {
-        return;
+        return; // Exit if username or email is taken
       }
     }
 
     if (currentPage < 3) {
-      setCurrentPage(prevPage => prevPage + 1); // Updated to use previous page value
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(prevPage => prevPage - 1); // Use previous page value
+      setCurrentPage(currentPage - 1);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
-    const form = new FormData();
-    form.append('username', formData.username);
-    form.append('email', formData.email);
-    form.append('password', formData.password);
-    form.append('company', formData.company_name);
-    form.append('industry', formData.industry);
-    form.append('size', formData.company_size);
-    form.append('introduction', formData.brief_introduction);
-    form.append('qualification', formData.qualification);
-    form.append('hiring', JSON.stringify(savedRoles));
-    form.append('title', JSON.stringify(savedJobTitles));
+    // Ensure submission only happens on the last page (page 3)
+    if (currentPage === 3) {
+      const form = new FormData();
 
-    if (formData.image) {
-      form.append('logo', formData.image);
-    }
+      // Append form data
+      form.append('username', formData.username);
+      form.append('email', formData.email);
+      form.append('password', formData.password);
+      form.append('company', formData.company_name);
+      form.append('industry', formData.industry);
+      form.append('size', formData.company_size);
+      form.append('introduction', formData.brief_introduction);
+      form.append('qualification', formData.qualification);
 
-    axios.post("https://r2c.onrender.com/signUp", form)
-      .then(data => {
-        console.log(data);
+      // Append roles and job titles as arrays
+      form.append('hiring', JSON.stringify(savedRoles));
+      form.append('title', JSON.stringify(savedJobTitles));
+
+      // Append image/logo file if present
+      if (formData.image) {
+        form.append('logo', formData.image);
+      }
+
+      try {
+        // Make the API request to submit the form
+        const response = await axios.post("https://r2c.onrender.com/signUp", form);
+        console.log(response);
+
         message.success('Sign up successful!');
-        navigate("payment");
-      })
-      .catch(error => {
-        console.log(error);
-        message.error(error.response?.data?.error || 'An error occurred.');
-      });
+        navigate("/payment");  // Redirect after successful sign-up
+      } catch (error) {
+        console.error(error);
+        message.error(error.response?.data?.error || 'An error occurred during sign-up.');
+      }
+    }
   };
 
   const handleAddRole = () => {
@@ -177,9 +196,10 @@ const RecruiterSignUp = () => {
     setSavedJobTitles(savedJobTitles.filter(job => job !== jobTitleToDelete));
   };
 
+  // File validation for image upload (file type and size)
   const beforeUpload = (file) => {
     const isImage = file.type.startsWith('image/');
-    const isSmallEnough = file.size / 1024 / 1024 < 2;
+    const isSmallEnough = file.size / 1024 / 1024 < 2; // less than 2MB
 
     if (!isImage) {
       message.error('You can only upload image files!');
@@ -194,15 +214,16 @@ const RecruiterSignUp = () => {
 
   return (
     <div className="form-container">
+      {/* Progress Bar */}
       <div className="progress-bar">
         <div className="progress" style={{ width: `${progress}%` }}></div>
       </div>
 
-      {/* Separate form tag only for submit button */}
       <form onSubmit={handleSubmit}>
         {currentPage === 1 && (
           <div className="form-page">
             <h2>Setting up Your Company Info</h2>
+
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -276,6 +297,7 @@ const RecruiterSignUp = () => {
         {currentPage === 2 && (
           <div className="form-page">
             <h2>Setting up your brand</h2>
+
             <label htmlFor="image">Upload company logo</label>
             <Upload
               name="logo"
@@ -311,6 +333,7 @@ const RecruiterSignUp = () => {
         {currentPage === 3 && (
           <div className="form-page">
             <h2>Setting up your Preferences</h2>
+
             <label htmlFor="roles">Roles you hire for</label>
             <input
               type="text"
@@ -414,14 +437,15 @@ const RecruiterSignUp = () => {
           </div>
         )}
 
-        <div className="navigation-buttons">
+        <div className="form-navigation">
           {currentPage > 1 && (
-            <button type="button" onClick={handlePreviousPage}>Back</button>
+            <Button className='btn-cta' type="button" onClick={handlePreviousPage}>Back</Button>
           )}
+
           {currentPage < 3 ? (
-            <button type="button" onClick={handleNextPage}>Continue</button>
+            <Button className='btn-cta' type="button" onClick={handleNextPage}>Next</Button>
           ) : (
-            <button type="submit">Submit</button>
+            <Button className='btn-cta' type="submit" onClick={handleSubmit}>Submit</Button>
           )}
         </div>
       </form>
