@@ -58,7 +58,7 @@
         display: none;
     }
 
-    #menu-Bar{
+    #menu-Bar, #close-Bar{
         display: flex;
         margin-right: 40px;
     }

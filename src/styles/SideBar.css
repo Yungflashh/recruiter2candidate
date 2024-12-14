@@ -1,0 +1,72 @@
+/* Sidebar Container Styling */
+.sideBar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;  /* Dark background */
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Align content to the left */
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);  /* Shadow for depth */
+    padding-left: 20px;
+  }
+  
+  /* Styling for each navigation link */
+  .sideBar-container nav {
+    margin-bottom: 20px;
+  }
+  
+  .sideBar-container .white-text {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;  /* Ensure links take full width */
+  }
+  
+  .sideBar-container nav:hover .white-text {
+    color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  /* Styling for Buttons (Login, Sign up) */
+  .sideBar-container button {
+    background-color: #555;
+    border: none;
+    padding: 10px 20px;
+    margin-top: auto;  /* Push buttons to the bottom */
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;  /* Center text inside the button */
+  }
+  
+  .sideBar-container button:hover {
+    background-color: #444;  /* Change color on hover */
+  }
+  
+  .sideBar-container .white-text {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .sideBar-container {
+      width: 200px;  /* Slightly narrower sidebar on mobile */
+      padding-left: 15px;
+    }
+  
+    .sideBar-container nav {
+      margin-bottom: 15px;  /* Reduce space between links on mobile */
+    }
+  
+    .sideBar-container button {
+      padding: 12px 25px;
+    }
+  }
+  
