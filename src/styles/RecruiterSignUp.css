@@ -61,7 +61,7 @@ input[type="radio"] {
 .navigation-buttons button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #4caf50;
+  background-color: #DC9BA5;
   color: white;
   border: none;
   border-radius: 5px;
@@ -70,7 +70,8 @@ input[type="radio"] {
 }
 
 .navigation-buttons button:hover {
-  background-color: #45a049;
+  background-color: #bd979c;
+ 
 }
 
 .navigation-buttons button:disabled {

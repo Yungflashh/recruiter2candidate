@@ -84,7 +84,7 @@ const RecruiterSignUp = () => {
 
   const handleNextPage = async () => {
     if (currentPage === 1) {
-      // Ensure username and email are entered
+      // Ensure username, email and password are entered and valid
       if (formData.username.trim() === '') {
         message.error('Username is required.');
         return;
@@ -92,6 +92,25 @@ const RecruiterSignUp = () => {
 
       if (formData.email.trim() === '') {
         message.error('Email is required.');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(formData.email)) {
+        message.error('Please enter a valid email address.');
+        return;
+      }
+
+      if (formData.password.trim() === '') {
+        message.error('Password is required.');
+        return;
+      }
+
+      // Validate password strength
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(formData.password)) {
+        message.error('Password must be at least 8 characters long and contain both letters and numbers.');
         return;
       }
 
@@ -169,6 +188,22 @@ const RecruiterSignUp = () => {
 
   const handleDeleteJobTitle = (jobTitleToDelete) => {
     setSavedJobTitles(savedJobTitles.filter(job => job !== jobTitleToDelete));
+  };
+
+  // File validation for image upload (file type and size)
+  const beforeUpload = (file) => {
+    const isImage = file.type.startsWith('image/');
+    const isSmallEnough = file.size / 1024 / 1024 < 2; // less than 2MB
+
+    if (!isImage) {
+      message.error('You can only upload image files!');
+    }
+
+    if (!isSmallEnough) {
+      message.error('Image must be smaller than 2MB!');
+    }
+
+    return isImage && isSmallEnough;
   };
 
   return (
@@ -262,8 +297,8 @@ const RecruiterSignUp = () => {
               name="logo"
               listType="picture-card"
               showUploadList={false}
-              action={"r2c.onrender.com/upload"}
-
+              action={"https://r2c.onrender.com/upload"}
+              beforeUpload={beforeUpload}
               onChange={handleFileChange}
             >
               {formData.image ? (
