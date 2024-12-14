@@ -93,7 +93,7 @@ const RecruiterSignUp = () => {
       await checkUsernameAvailability();
       if (usernameTaken) return; // Stop navigation if the username is taken
 
-      if (formData.email.trim() === '') {
+      if (formData.username.trim != "" && formData.email.trim() === '') {
         message.error('Email is required.');
         return;
       }
