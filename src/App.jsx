@@ -2,6 +2,7 @@ import AboutPage from "./pages/AboutPage"
 import CandidateSignUp from "./pages/CandidateSignUp"
 import ForRecruiter from "./pages/ForRecruiter"
 import HomePage from "./pages/HomePage"
+import PaymentPage from "./pages/PaymentPage"
 import RecruiterSignUp from "./pages/RecruiterSignUp"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
@@ -27,6 +28,7 @@ function App() {
        <Route path="/CandidateSignUp" element = { <CandidateSignUp />} />
        <Route path="/signUp" element = { <SignUpPage />} />
        <Route path="/signin" element = { <SignInPage/>} />
+       <Route path="/payment" element = { <PaymentPage/>} />
 
         </Routes>
         <Footer/>

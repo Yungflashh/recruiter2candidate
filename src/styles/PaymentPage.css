@@ -1,0 +1,34 @@
+.payment-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid red; */
+    position: relative; /* Ensure confetti is placed over the container */
+    overflow: hidden; /* Prevent any content from overflowing */
+}
+
+.payment-container h2 {
+    font-size: 30px;
+    width: 409px;
+    text-align: center;
+    z-index: 1; /* Ensure text is above the confetti */
+    margin: 0px 20px;
+}
+
+#payment-btn{
+    margin-top: 20px; /* Add space between text and button */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #DC9BA5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+#payment-btn:hover {
+    background-color: #dbb6bc; /* Change color on hover */
+}
