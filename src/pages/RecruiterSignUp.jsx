@@ -3,10 +3,8 @@ import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import "../styles/RecruiterSignUp.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
 const RecruiterSignUp = () => {
-  const navigate = useNavigate
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState({
     username: '',
@@ -163,8 +161,6 @@ const RecruiterSignUp = () => {
       .then(data => {
         console.log(data);
         message.success('Sign up successful!');
-
-        navigate("/payment")
       })
       .catch(error => {
         console.log(error);
@@ -439,19 +435,11 @@ const RecruiterSignUp = () => {
           {currentPage > 1 && (
             <button type="button" onClick={handlePreviousPage}>Back</button>
           )}
-         <div className="navigation-buttons">
-  {currentPage > 1 && (
-    <button type="button" onClick={handlePreviousPage}>Back</button>
-  )}
-  {currentPage < 3 ? (
-    // This button just navigates to the next page without submitting the form
-    <button type="button" onClick={handleNextPage}>Continue</button>
-  ) : (
-    // This button submits the form, only on the last page
-    <button type="submit">Submit</button>
-  )}
-</div>
-
+          {currentPage < 3 ? (
+            <button type="button" onClick={handleNextPage}>Continue</button>
+          ) : (
+            <button type="submit">Submit</button>
+          )}
         </div>
       </form>
     </div>
