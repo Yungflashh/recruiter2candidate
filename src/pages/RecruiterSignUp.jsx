@@ -49,10 +49,13 @@ const RecruiterSignUp = () => {
 
   // Function to check if the username is available
   const checkUsernameAvailability = async () => {
+    console.log("Checking username availability with username:", formData.username); // Log username
     try {
-      const response = await axios.post('https://r2c.onrender.com/checkCred', {
-        username: formData.username,
-      });
+      // Logging the data that will be sent to the backend
+      const dataToSend = { username: formData.username };
+      console.log("Data sent to backend for username check:", dataToSend);
+
+      const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
       if (response.data.available) {
         setUsernameTaken(false); // Username is available
       } else {
@@ -67,10 +70,13 @@ const RecruiterSignUp = () => {
 
   // Function to check if the email is available
   const checkEmailAvailability = async () => {
+    console.log("Checking email availability with email:", formData.email); // Log email
     try {
-      const response = await axios.post('https://r2c.onrender.com/checkCred', {
-        email: formData.email,
-      });
+      // Logging the data that will be sent to the backend
+      const dataToSend = { email: formData.email };
+      console.log("Data sent to backend for email check:", dataToSend);
+
+      const response = await axios.post('https://r2c.onrender.com/checkCred', dataToSend);
       if (response.data.available) {
         setEmailTaken(false); // Email is available
       } else {
