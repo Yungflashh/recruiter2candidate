@@ -1,6 +1,15 @@
 /* Preferences.css */
 
-.card {
+/* Container for all user cards */
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Individual user card styling */
+  .card {
     width: 300px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -8,6 +17,7 @@
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
+    flex: 1 1 calc(33% - 40px);  /* Cards will take 1/3 of the space with margin adjustments */
   }
   
   .card .title {
@@ -26,5 +36,11 @@
   .card .size {
     font-size: 16px;
     margin-bottom: 5px;
+  }
+  
+  .card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
   
