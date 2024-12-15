@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
+import "../styles/Prefrences.css"
 
 const Preferences = () => {
   const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ const Preferences = () => {
     axios.get('https://r2c.onrender.com/search')
       .then(response => {
         // Assume we are working with the first user in the response
-        setUser(response.data.users[0]); // Adjust based on the actual response structure
+        setUser(response.data.users); // Adjust based on the actual response structure
       })
       .catch(error => console.error("Error fetching data:", error));
   }, []);
