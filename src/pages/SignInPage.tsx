@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import "../styles/SignInPage.css";
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import {Button} from "antd";
+
  // Import icons
+
+ import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   // Step 1: Define state for email, password, error message, and password visibility
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // State for error message
+  const [successMsg, setSuccessMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   // Step 2: Handle form input changes
@@ -27,6 +32,7 @@ const SignInPage = () => {
 
     // Clear any previous errors
     setError("");
+    setSuccessMsg("")
 
     // Step 4: Log the form data to console
     console.log("Form Data:", { email, password });
@@ -52,6 +58,13 @@ const SignInPage = () => {
       if (response.ok) {
         // Do something on successful sign-in
         console.log("Sign-in successful:", data);
+        setSuccessMsg("Sign-in successful! Welcome.");
+
+        setTimeout(() =>{
+            navigate("/prefrences")
+        },3000)
+        
+      
         
       } else {
         // Handle error (invalid credentials, etc.)
@@ -114,6 +127,7 @@ const SignInPage = () => {
 
         {/* Step 7: Display error message if any */}
         {error && <div className="error-message">{error}</div>}
+        {successMsg && <div className="sucess-message">{successMsg}</div>}
       </div>
     </div>
   );

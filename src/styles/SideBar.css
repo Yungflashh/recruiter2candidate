@@ -12,6 +12,7 @@
     align-items: flex-start;  /* Align content to the left */
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);  /* Shadow for depth */
     padding-left: 20px;
+    z-index: 1;
   }
   
   /* Styling for each navigation link */
