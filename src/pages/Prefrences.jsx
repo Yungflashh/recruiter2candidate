@@ -23,11 +23,14 @@ const Preferences = () => {
     <div className="user-list">
       {users.map((user) => (
         <div className="card" key={user.username}> {/* Using username as a unique key */}
+          {/* Check if the logo exists and display it */}
+          {user.logo && <img src={user.logo} alt={`${user.company} logo`} className="user-logo" />}
+          
           <h2 className="title">{user.title}</h2>
           <div className="username">Username: {user.username}</div>
           <div className="company">Company: {user.company}</div>
           <div className="email">Email: {user.email}</div>
-          <div className="hiring">Hiring: {user.hiring ? 'Yes' : 'No'}</div>
+          <div className="hiring">Hiring: {user.hiring }</div>
           <div className="industry">Industry: {user.industry}</div>
           <div className="introduction">Introduction: {user.introduction}</div>
           <div className="qualification">Qualification: {user.qualification}</div>
