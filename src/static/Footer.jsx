@@ -3,7 +3,8 @@ const Footer = () => {
   return (
     <div>
         <div className="footer-container">
-                GTETG
+                
+              
 
         </div>
     </div>
