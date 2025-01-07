@@ -5,6 +5,7 @@
     justify-content: space-around;
     align-items: center;
     height: 86px;
+    /* position: fixed; */
 }
 
 .nav-container{

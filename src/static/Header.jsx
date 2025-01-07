@@ -45,7 +45,14 @@ const Header = () => {
             For Recruiter
           </Link>
         </nav>
-        <nav>For Candidate</nav>
+        <nav>
+        <Link to={"/candidate"} className="white-text">
+      
+          For Candidate
+          </Link>
+          
+          
+          </nav>
       </div>
 
       <div className="btn-container">

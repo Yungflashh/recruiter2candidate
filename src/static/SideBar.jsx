@@ -9,7 +9,8 @@ const SideBar = ({ closeSidebar }) => {
 <nav><Link  to={"/"} className="white-text" onClick={closeSidebar}>Home </Link></nav>
 <nav> <Link to={"/aboutUs"} className="white-text" onClick={closeSidebar}>About us </Link>  </nav>
 <nav><Link to={"/recruiter"}className="white-text" onClick={closeSidebar} >For Recruiter</Link> </nav>
-<nav>For Candidate</nav>
+<nav><Link to={"/candidate"}className="white-text" onClick={closeSidebar} >For Candidate</Link> </nav>
+
 
 
     <div>

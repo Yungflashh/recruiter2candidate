@@ -31,7 +31,7 @@ const ForRecruiter = () => {
           
         </div>
 
-      
+        <h2>Checkout these advanced features for Recruiters</h2>
         <div className="cardR">
         <RecruiterCard image={cardimg1} title={"Candidate Search Tools"} desc={"Filter by skills, experience, and more."}/>
         <RecruiterCard image={cardimg2} title={"Profile Management"} desc={"Save candidate profiles and track applications."}/>

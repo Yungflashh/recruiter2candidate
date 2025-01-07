@@ -1,0 +1,121 @@
+/* Base Styles */
+.for-candidate-hero-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 60px 10px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .candidate-hero-text h2 {
+    font-family: Roboto;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 56.25px;
+    text-align: left;
+  }
+  
+  .candidate-hero-text p {
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.44px;
+  }
+  
+  .candidate-hero-text button {
+    height: 54px;
+    padding: 12px;
+    border-radius: 30px;
+    background: #DC9BA5;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .candidate-hero-img img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Card Section */
+  .cardR {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  
+  .cardR .recruiter-card {
+    width: 22%; /* Adjust card size */
+    margin: 10px;
+  }
+  
+  .cardR .recruiter-card img {
+    max-width: 100%;
+  }
+  
+  /* Media Queries */
+  
+  /* Tablet View */
+  @media (max-width: 768px) {
+    .for-candidate-hero-section {
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    .candidate-hero-text button{
+        margin-bottom: 100px;
+    }
+  
+    .candidate-hero-text h2 {
+      font-size: 36px;
+      line-height: 42px;
+    }
+  
+    .candidate-hero-text p {
+      font-size: 18px;
+      line-height: 21px;
+      text-align: center;
+    }
+  
+    .cardR {
+      justify-content: center;
+    }
+  
+    .cardR .recruiter-card {
+      width: 45%;
+      margin: 20px;
+    }
+  }
+  
+  /* Mobile View */
+  @media (max-width: 480px) {
+    .candidate-hero-text h2 {
+      font-size: 28px;
+      line-height: 32px;
+    }
+  
+    .candidate-hero-text p {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  
+    .candidate-hero-text button {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 16px;
+    }
+  
+    .cardR {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .cardR .recruiter-card {
+      width: 80%;
+      margin: 10px 0;
+    }
+  }
+  
