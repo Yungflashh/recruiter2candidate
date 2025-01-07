@@ -5,4 +5,4 @@ const CandidateSignUp = () => {
   )
 }
 
-export default CandidateSignUp
+export default CandidateSignUp   
